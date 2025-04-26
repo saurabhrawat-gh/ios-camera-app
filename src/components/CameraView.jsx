@@ -24,11 +24,18 @@ const CameraView = () => {
   const [flip, setFlip] = useState(false);
 
   useCamera(videoRef);
+
   useEffect(() => {
-    const images = getSavedImages();
-    if (images.length > 0) {
-      setLatestImage(images[images.length - 1]);
-    }
+    const interval = setInterval(() => {
+      const images = getSavedImages();
+      const lastImage = images.length > 0 ? images[images.length - 1] : null;
+      setLatestImage((prev) => {
+        if (prev !== lastImage) return lastImage;
+        return prev;
+      });
+    }, 1000); // checks every second
+  
+    return () => clearInterval(interval);
   }, []);
 
   const handleCapture = () => {
@@ -114,7 +121,11 @@ const CameraView = () => {
   const baseActionWrapperUI = (
     <>
       <div className={`${latestImage ? "image-preview" : "hide-preview"}`}>
-        {latestImage && <img src={latestImage} alt="Latest capture" />}
+        {latestImage ? (
+          <img src={latestImage} alt="Latest capture" />
+        ) : (
+          <img className="hide-preview" src={latestImage} alt="img" />
+        )}
       </div>
       {captureButtonUI}
       <span className="icon switch-camera" onClick={() => setFlip(!flip)}>
@@ -126,6 +137,7 @@ const CameraView = () => {
       </span>
     </>
   );
+  
 
   return (
     <div className="camera-view">

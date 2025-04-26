@@ -186,7 +186,7 @@
 }
 
 .hide-preview {
-  display: hidden;
+  visibility: hidden;
 }
 
 .switch-camera {
