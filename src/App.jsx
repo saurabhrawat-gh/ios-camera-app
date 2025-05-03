@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import CameraView from "./components/CameraView";
-import MobileFrame from "./components/MobileFrame";
+import React from "react";
+import MobileFrame from "./components/mobile-frame/MobileFrame";
+import CameraView from "./components/camera-view/CameraView";
 
 function App() {
   return (

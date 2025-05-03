@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const useCamera = (videoRef) => {
+export const useCamera = (videoRef) => {
   useEffect(() => {
     let stream;
 
@@ -19,7 +19,7 @@ const useCamera = (videoRef) => {
     startCamera();
 
     return () => {
-      // Cleanup: stop all tracks
+
       if (stream) {
         stream.getTracks().forEach((track) => track.stop());
       }
@@ -27,4 +27,3 @@ const useCamera = (videoRef) => {
   }, [videoRef]);
 };
 
-export default useCamera;

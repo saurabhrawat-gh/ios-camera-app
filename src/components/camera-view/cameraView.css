@@ -56,10 +56,13 @@
   display: flex;
   overflow-x: auto;
   gap: 1rem;
-  padding: 0 2rem;
+  padding: 0rem 2rem;
   scroll-snap-type: x mandatory;
+  scroll-padding-inline: 50%;
   -webkit-overflow-scrolling: touch;
   white-space: nowrap;
+  scroll-behavior: smooth;
+  align-items: center;
 }
 
 .options-bar::-webkit-scrollbar {
@@ -68,16 +71,16 @@
 
 .option {
   color: rgba(255, 255, 255, 1);
-  transition: opacity 0.2s;
   cursor: pointer;
   font-size: 0.75rem;
-  scroll-snap-align: start;
-  flex: 0 0 auto;   
-  transition: opacity 0.2s ease-in-out;
+  scroll-snap-align: center;
+  flex: 0 0 auto;
+  transition: transform 0.3s ease, opacity 0.2s ease-in-out;
 }
 
 .option.selected {
   color: orange;
+  font-weight: bold;
 }
 
 .bottom-actions {
@@ -127,36 +130,38 @@
 }
 
 .zoom-ui {
+  font-family: monospace;
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
   position: absolute;
-  border-radius: 50px;
+  border-radius: 99px;
   background-color: rgba(0, 0, 0, 0.25);
-  padding: 0.75rem;
-
-  top: -70px;
+  min-width: 80px;
+  height: 50px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  top: -60px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .zoom {
-  display: grid;
-  place-items: center;
   color: white;
   cursor: pointer;
   opacity: 0.7;
-  transition: opacity 0.2s;
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 8px;
+  padding: 8px 8px;
   border-radius: 99px;
-  font-size: 12px;
+  font-size: 10px;
+  transition: opacity 0.1s;
   transition: transform 0.3s ease-in-out;
 }
 
 .zoom.selected {
+  padding: 12px 8px;
   transform: scale(1.25);
   opacity: 1;
   color: #ffcc00;
@@ -197,4 +202,43 @@
   background-color: rgba(0, 0, 0, 0.25);
   padding: 12px;
   cursor: pointer;
+}
+
+.delete-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1.2rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  text-align: center;
+  max-width: 80%;
+}
+
+.delete-overlay p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0.8rem;
+}
+
+.delete-overlay button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-overlay button:first-child {
+  background: #ff4d4d;
+  color: white;
+}
+
+.delete-overlay button:last-child {
+  background: #ccc;
 }

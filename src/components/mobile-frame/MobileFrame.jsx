@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/mobileFrame.css";
+import "./mobileFrame.css";
 
 const MobileFrame = ({ children }) => {
   return (
