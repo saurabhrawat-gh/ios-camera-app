@@ -1,4 +1,4 @@
-export const saveImageBlob = (blob) => {
+export const saveImageBlobToStorage = (blob) => {
   const reader = new FileReader();
   reader.readAsDataURL(blob);
   reader.onloadend = () => {
@@ -14,8 +14,8 @@ export const getSavedImages = () => {
   try {
     const images = JSON.parse(localStorage.getItem("capturedImages") || "[]");
     return Array.isArray(images) ? images : [];
-  } catch (e) {
-    console.error("Failed to parse saved images", e);
+  } catch (error) {
+    console.error("Failed to parse saved images", error);
     return [];
   }
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { saveImageBlob, getSavedImages } from "../../utilities/storage";
+import { saveImageBlobToStorage, getSavedImages } from "../../utilities/storage";
 import "./cameraView.css";
 import { useCamera } from "../../hooks/useCamera";
 import TopBar from "./TopBar";
@@ -51,12 +51,7 @@ const CameraView = () => {
     ctx.drawImage(video, 0, 0, width, height);
 
     canvas.toBlob((blob) => {
-      saveImageBlob(blob);
-      const reader = new FileReader();
-      reader.readAsDataURL(blob);
-      reader.onloadend = () => {
-        setLatestImage(reader.result);
-      };
+      saveImageBlobToStorage(blob);
       setFlashMessage("Image has been taken!");
       setTimeout(() => setFlashMessage(""), 2000);
     }, "image/jpeg");
